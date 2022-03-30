@@ -1,0 +1,55 @@
+import React, {useState} from 'react'
+import { useNavigate } from "react-router-dom"
+
+
+export default function RegisterPage() {
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const navigate = useNavigate()  
+
+  function handleOnSubmit(e) {
+    e.preventDefault()
+    const payload = {username, password}
+    const url = "https://frebi.willandskill.eu/api-token-auth/"
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(res => res.json())
+    .then(data => {
+        const token = data.token
+        localStorage.setItem("crm",token)
+        navigate('/home')
+    })
+}
+  return (
+      <div className="containerLogin">
+        <div className="loginBox ">
+          <h3 className="text-center">Login Page</h3>
+            <form onSubmit={handleOnSubmit}>
+            <label>Username: </label>
+                <input
+                    className="form-control"
+                    type="text"
+                    value={username}
+                    placeholder="Username"
+                    onChange={e => setUsername(e.target.value)}
+                />
+                <label>Password: </label>
+                <input
+                    className="form-control"
+                    type="password"
+                    value={password}
+                    placeholder="Password"
+                    onChange={e => setPassword(e.target.value)}
+                />
+                 <input type="submit" value="Submit" className='loginBtn' />
+            </form>
+          <p className="mt-2">Not a user? Click <a href="/register" className="link-info">here</a> to create a user</p>
+      </div>
+  </div>
+  )
+}
