@@ -26,7 +26,7 @@ export default function RegisterPage() {
     .then(data => {
         const token = data.token
         localStorage.setItem("todoList",token)
-        navigate('/home')
+        navigate('/login')
     })
 
 }
