@@ -19,7 +19,6 @@ app.use("/api", userRoutes)
 
 
 
-
 // Tillsatt middleware för att kolla att **** 15:22 på dagens inspelning
 app.use((req, res, next) => {
     const authHeader = req.header("Authorization")
@@ -28,35 +27,6 @@ app.use((req, res, next) => {
         req.user = jwt.verify(token, JWT_SECRET)
     }
     next()
-})
-
-
-
-app.get("/secret", (req, res) => {
-    if (req.user){
-        res.json({message: `Hello ${req.user.username}`})
-    } else {
-        res.sendStatus(401)
-    }
-})
-
-// Skapar ett token till kunden, signeras med vår kod och meta data (hur länge den räcker)
-app.post("/tokens", async (req, res) => {
-    const {username, password} = req.body
-    const user = await User.login(username, password)
-    if (user) {
-        // user._id = ObjectId091he982he82 in MongoDB
-        const userId = user._id.toString()
-        const token = jwt.sign(
-            {userId, username: user.username},
-            JWT_SECRET,
-            {expiresIn: 120, subject: userId}
-        )
-        // Skickar ut det i vår JSON response till client
-        res.json(token)
-    } else {
-        res.sendStatus(401)
-    }
 })
 
 
