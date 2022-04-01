@@ -1,16 +1,20 @@
 import React, {useState} from 'react'
 import { useNavigate } from "react-router-dom"
+import { BASE_API } from "../utils"
 
 
 export default function RegisterPage() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const [errorText, setErrorText] = useState("")
+
   const navigate = useNavigate()  
 
   function handleOnSubmit(e) {
     e.preventDefault()
     const payload = {username, password}
-    const url = "https://frebi.willandskill.eu/api-token-auth/"
+    const url = `${BASE_API}/login`
+
     fetch(url, {
         method: "POST",
         headers: {
@@ -20,11 +24,16 @@ export default function RegisterPage() {
     })
     .then(res => res.json())
     .then(data => {
+      if (data.message) {
+        setErrorText(data.message)
+      } else {
         const token = data.token
-        localStorage.setItem("crm",token)
-        navigate('/home')
-    })
+        localStorage.setItem("todoList", token)
+        navigate("/home")
+      }
+  })
 }
+
   return (
       <div className="containerLogin">
         <div className="loginBox ">
@@ -48,6 +57,8 @@ export default function RegisterPage() {
                 />
                  <input type="submit" value="Submit" className='loginBtn' />
             </form>
+            {errorText && 
+                <p className="text-danger">{errorText}</p>}
           <p className="mt-2">Not a user? Click <a href="/register" className="link-info">here</a> to create a user</p>
       </div>
   </div>
