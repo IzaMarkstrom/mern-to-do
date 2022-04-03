@@ -6,15 +6,16 @@ import { BASE_API } from "../utils"
 export default function RegisterPage() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const [errorText, setErrorText] = useState("")
 
   const navigate = useNavigate()  
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
-    alert("Hey there")
 
     const payload = {username, password}
     const url = `${BASE_API}/user/create`
+    
     fetch(url, {
         method: "POST",
         headers: {
@@ -24,9 +25,13 @@ export default function RegisterPage() {
     })
     .then(res => res.json())
     .then(data => {
+      if (data.message) {
+        setErrorText(data.message)
+      } else {
         const token = data.token
-        localStorage.setItem("todoList",token)
-        navigate('/login')
+        localStorage.setItem("todoList", token)
+        navigate("/login")
+      }
     })
 
 }
@@ -35,6 +40,8 @@ export default function RegisterPage() {
         <div className="loginBox ">
           <h3 className="text-center">Register Page</h3>
             <form onSubmit={handleOnSubmit}>
+            {errorText && 
+                <p className="text-danger">{errorText}</p>}
             <label>Username: </label>
                 <input
                     className="form-control"
