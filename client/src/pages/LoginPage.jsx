@@ -39,6 +39,8 @@ export default function RegisterPage() {
         <div className="loginBox ">
           <h3 className="text-center">Login Page</h3>
             <form onSubmit={handleOnSubmit}>
+            {errorText && 
+                <p className="text-danger">{errorText}</p>}
             <label>Username: </label>
                 <input
                     className="form-control"
@@ -57,8 +59,6 @@ export default function RegisterPage() {
                 />
                  <input type="submit" value="Submit" className='loginBtn' />
             </form>
-            {errorText && 
-                <p className="text-danger">{errorText}</p>}
           <p className="mt-2">Not a user? Click <a href="/register" className="link-info">here</a> to create a user</p>
       </div>
   </div>
