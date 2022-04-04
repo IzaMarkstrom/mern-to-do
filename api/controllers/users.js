@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken")
 const { User } = require("../models/UserSchema")
 const bodyParser = require("body-parser")
 const bcrypt = require("bcryptjs")
+const JWT_SECRET = process.env.JWT_SECRET;
 
 
 const createUser = async (req, res) => {
@@ -27,14 +28,14 @@ const loginUser = async (req, res) => {
         const validPassword = await bcrypt.compare(password, userExists.password)
 
         if(validPassword){
-            jwt.sign({ username, id: userExists._id.toString() }, process.env.JWT_SECRET, (err, token) => {
-
-                if (err) {
-                    res.status(401).json(err)
-                } else {
-                    res.status(200).json({ token })
-                }
-            })
+            // om vi får tillbaka användaren från vår authentication i user.js
+            const userId = userExists._id.toString();
+            //vi skapar en jwt token med sign()
+            const token = jwt.sign({ userId, username: userExists.username }, JWT_SECRET, {
+                expiresIn: 120, // livslängden på tokenen
+                subject: userId, // ska vara unikt värde så userId går bra
+            });
+            res.status(200).json({ token })
         } else {
             res.status(403).json({ message: "Wrong password" })
         }
