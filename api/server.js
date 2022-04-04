@@ -1,8 +1,9 @@
 const express = require("express");
-const mongoose = require("./database")
-const jwt = require("jsonwebtoken")
-const { User } = require("./models/UserSchema")
-const cors = require("cors")
+const mongoose = require("./database");
+const jwt = require("jsonwebtoken");
+const { User } = require("./models/UserSchema");
+const cors = require("cors");
+require("dotenv").config();
 
 const app = express()
 const PORT = 3005;
