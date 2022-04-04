@@ -15,20 +15,10 @@ app.use(cors())
 
 // Api routes
 const userRoutes = require("./routes/userRoutes")
+const todoRoutes = require("./routes/todoRoutes")
 
-app.use("/api", userRoutes)
-
-
-
-// Tillsatt middleware för att kolla att **** 15:22 på dagens inspelning
-app.use((req, res, next) => {
-    const authHeader = req.header("Authorization")
-    if (authHeader){
-        const token = authHeader.split(" ") [1]
-        req.user = jwt.verify(token, JWT_SECRET)
-    }
-    next()
-})
+app.use("/api/users", userRoutes)
+app.use("/api/todos", todoRoutes)
 
 
 app.listen(PORT, () => {
