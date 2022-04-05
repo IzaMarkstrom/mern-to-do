@@ -14,7 +14,7 @@ export default function RegisterPage() {
     e.preventDefault()
 
     const payload = {username, password}
-    const url = `${BASE_API}/user/create`
+    const url = `${BASE_API}/users/create`
     
     fetch(url, {
         method: "POST",
