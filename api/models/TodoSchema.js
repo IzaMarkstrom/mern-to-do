@@ -6,6 +6,23 @@ const TodoSchema = new Schema({
     complete: {type: Boolean, default: false},
 },  { timestamps: true })
 
+
+const createNewTodo = async (todoData) => {
+    const todo = new Todo({text: todoData})
+    await todo.save()
+    return todo
+}
+
+const getAllTodos = async () => {
+    const listTodos = await Todo.find()
+    return listTodos ? listTodos : null
+}
+
 const Todo = mongoose.model("Todo", TodoSchema)
 
-module.exports = Todo
+module.exports = {
+    createNewTodo,
+    getAllTodos
+}
+
+exports.Todo = Todo
