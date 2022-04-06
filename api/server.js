@@ -6,8 +6,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const app = express()
-const PORT = 3005;
-const JWT_SECRET = "19298qw9fw78q923516bgdywqbd8"
+const PORT = 4000;
 
 app.use(express.json())
 app.use(cors())
