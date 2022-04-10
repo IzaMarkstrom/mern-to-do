@@ -4,10 +4,11 @@ const router = express.Router()
 const { authUser } = require("../controllers/auth")
 const todos = require("../controllers/todos")
 
-// User routes
+
 router.get("/homepage", authUser, todos.listAllTodos);
 router.post("/homepage", authUser, todos.createTodos);
-router.get("/homepage", authUser, todos.getDoneTodos);
+router.put("/:id", authUser, todos.completeTodos);
+router.delete("/:id", authUser, todos.deleteTodos);
 
 
 module.exports = router
