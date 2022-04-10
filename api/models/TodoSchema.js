@@ -18,11 +18,23 @@ const getAllTodos = async () => {
     return listTodos ? listTodos : null
 }
 
+const setCompleteStatus = async (todoId) => {
+    const todo = await Todo.findOne({_id: todoId})
+
+    if(todo.complete == false){
+        await Todo.findByIdAndUpdate(todoId, { complete: true }, {new: true})
+    } else {
+        await Todo.findByIdAndUpdate(todoId, { complete: false }, {new: true})
+    }
+    return todo;
+}
+
 const Todo = mongoose.model("Todo", TodoSchema)
 
 module.exports = {
     createNewTodo,
-    getAllTodos
+    getAllTodos,
+    setCompleteStatus
 }
 
 exports.Todo = Todo
