@@ -3,7 +3,6 @@ import { BASE_API } from "../utils"
 
 export const RenderTodos = () => {
     const [todos, setTodos] = useState([])
-    const [newTodo, setNewTodo] = useState("")
   
     useEffect(() => {
       fetch(`${BASE_API}/todos/homepage`)
@@ -24,15 +23,22 @@ export const RenderTodos = () => {
     }
 
     const completeTodo = async id => {
-        const data = await fetch(`${BASE_API}/todo/complete/${id}`)
-            .then(res => res.json())
+        console.log(id)
 
-            setTodos(todos => todos.map(todo => {
-                if(todo._id === data._id) {
-                    todo.complete = data.complete
-                }
-                return todo
-            }))
+            const requestOptions = {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' }
+            };
+            fetch(`${BASE_API}/todos/${id}`, requestOptions)
+                .then(res => res.json())
+                // .then(data => console.log(data));
+    }
+
+    const deleteTodo = async id => {
+        console.log(id)
+
+        fetch(`${BASE_API}/todos/${id}`, { method: 'DELETE' })
+        .then(res => res.json())
     }
 
 
@@ -45,7 +51,7 @@ export const RenderTodos = () => {
         
                 <div className="text">{todo.text}</div>
         
-                <div className="delete-todo">x</div>
+                <div className="delete-todo" onClick={() => deleteTodo(todo._id)}>x</div>
                 <div className="timestamp">{setTime(todo.createdAt)}</div>
             </div>
         ))}
