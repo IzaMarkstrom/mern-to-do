@@ -9,7 +9,7 @@ const generateToken = (user) => {
   });
 };
 
-// Tillsatt middleware för att kolla att användaren är inloggad
+
 const authUser = (req, _res, next) => {
   const authHeader = req.header("Authorization");
   if (authHeader) {
