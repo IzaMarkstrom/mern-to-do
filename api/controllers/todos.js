@@ -1,4 +1,4 @@
-const { createNewTodo, getAllTodos, setCompleteStatus, Todo } = require("../models/TodoSchema")
+const { createNewTodo, getAllTodos, setCompleteStatus, removeTodos, Todo } = require("../models/TodoSchema")
 
 const listAllTodos = async (req, res) => {
     const todoData = await getAllTodos()
@@ -27,9 +27,9 @@ const completeTodos = async (req, res) => {
 
 const deleteTodos = async (req, res) => {
     const todoId = req.params.id
-    const result = await Todo.findByIdAndDelete(todoId)
+    const result = await removeTodos(todoId)
 
-    res.json(result)
+    res.status(200).json(result)
 }
 
 module.exports = { listAllTodos, createTodos, completeTodos, deleteTodos }
