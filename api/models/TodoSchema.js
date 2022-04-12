@@ -29,12 +29,21 @@ const setCompleteStatus = async (todoId) => {
     return todo;
 }
 
+
+const removeTodos = async (todoId) => {
+    const todo = await Todo.findByIdAndDelete({_id: todoId})
+
+    return `The todo is deleted`;
+}
+
+
 const Todo = mongoose.model("Todo", TodoSchema)
 
 module.exports = {
     createNewTodo,
     getAllTodos,
-    setCompleteStatus
+    setCompleteStatus,
+    removeTodos
 }
 
 exports.Todo = Todo
