@@ -1,7 +1,11 @@
-const { createNewTodo, getAllTodos, setCompleteStatus, removeTodos, Todo } = require("../models/TodoSchema")
+const { createTodosDatabase, 
+    getAllTodosDatabse, 
+    completeTodosDatabse, 
+    deleteTodosDatabse, 
+    Todo } = require("../models/TodoSchema")
 
 const listAllTodos = async (req, res) => {
-    const todoData = await getAllTodos()
+    const todoData = await getAllTodosDatabse()
 
     if(todoData !== null){
         res.status(200).json({ todoData })
@@ -14,20 +18,20 @@ const listAllTodos = async (req, res) => {
 const createTodos = async (req, res) => {
     const todoData = req.body.text
 
-    const todo = await createNewTodo(todoData)
+    const todo = await createTodosDatabase(todoData)
     res.status(200).json({ todo })
 }
 
 const completeTodos = async (req, res) => {
     const todoId = req.params.id
-    const todo = await setCompleteStatus(todoId)
+    const todo = await completeTodosDatabse(todoId)
 
     res.status(200).json({ todo })
 }
 
 const deleteTodos = async (req, res) => {
     const todoId = req.params.id
-    const result = await removeTodos(todoId)
+    const result = await deleteTodosDatabse(todoId)
 
     res.status(200).json(result)
 }
