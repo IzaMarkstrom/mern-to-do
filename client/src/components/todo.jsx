@@ -23,6 +23,7 @@ export const RenderTodos = () => {
     }
 
     const completeTodo = async id => {
+
         console.log(id)
 
             const requestOptions = {
