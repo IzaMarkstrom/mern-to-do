@@ -13,7 +13,7 @@ export default function RegisterPage() {
   function handleOnSubmit(e) {
     e.preventDefault()
     const payload = {username, password}
-    const url = `${BASE_API}/users/login`
+    const url = `${BASE_API}/users`
 
     fetch(url, {
         method: "POST",
