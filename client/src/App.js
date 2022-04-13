@@ -9,13 +9,14 @@ const UserContext = createContext()
 function App() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const [todos, setTodos] = useState([])
 
 
   return (
     <div className="bodyContainer">
     <Routes>
       <Route path="/register" element={<RegisterPage/>} />
-      <Route path="/login" element={<LoginPage/>} />
+      <Route path="/" element={<LoginPage/>} />
       <Route path="/home" element={<HomePage/>} />
     </Routes>
     </div>
