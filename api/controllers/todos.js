@@ -1,12 +1,27 @@
 const { createTodosDatabase, 
-    getAllTodosDatabse, 
-    completeTodosDatabse, 
-    deleteTodosDatabse, 
+    getAllTodosDatabase, 
+    completeTodosDatabase, 
+    deleteTodosDatabase,
+    getCompletedTodosDatabase, 
     Todo } = require("../models/TodoSchema")
 
 const listAllTodos = async (req, res) => {
-    const todoData = await getAllTodosDatabse()
+    const completedTodos = req.query.completedTodos
 
+    // if(completeTodos){
+    //     const todoData = await getCompletedTodosDatabase()
+    //     // VARFÖR GENERERAR DEN TVÄRTOM????
+    //     // Fråga Zander
+    //     if(todoData !== null){
+    //         res.status(200).json({ todoData })
+    //     } else {
+    //         res.status(404).json({ message: "No list found" })
+    //     }
+    // }
+
+    const todoData = await getAllTodosDatabase()
+    // VARFÖR GENERERAR DEN TVÄRTOM????
+    // Fråga Zander
     if(todoData !== null){
         res.status(200).json({ todoData })
     } else {
@@ -24,14 +39,14 @@ const createTodos = async (req, res) => {
 
 const completeTodos = async (req, res) => {
     const todoId = req.params.id
-    const todo = await completeTodosDatabse(todoId)
+    const todo = await completeTodosDatabase(todoId)
 
     res.status(200).json({ todo })
 }
 
 const deleteTodos = async (req, res) => {
     const todoId = req.params.id
-    const result = await deleteTodosDatabse(todoId)
+    const result = await deleteTodosDatabase(todoId)
 
     res.status(200).json(result)
 }
