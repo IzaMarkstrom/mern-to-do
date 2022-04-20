@@ -13,12 +13,19 @@ const createTodosDatabase = async (todoData) => {
     return todo
 }
 
-const getAllTodosDatabse = async () => {
+const getAllTodosDatabase = async () => {
     const listTodos = await Todo.find()
+    .sort({ createdAt: -1 })
     return listTodos ? listTodos : null
 }
 
-const completeTodosDatabse = async (todoId) => {
+const getCompletedTodosDatabase = async () => {
+    const listTodos = await Todo.find({complete: true})
+    .sort({ createdAt: -1 })
+    return listTodos ? listTodos : null
+}
+
+const completeTodosDatabase = async (todoId) => {
     const todo = await Todo.findOne({_id: todoId})
 
     if(todo.complete == false){
@@ -30,7 +37,7 @@ const completeTodosDatabse = async (todoId) => {
 }
 
 
-const deleteTodosDatabse = async (todoId) => {
+const deleteTodosDatabase = async (todoId) => {
     await Todo.findByIdAndDelete({_id: todoId})
 
     return `The todo is deleted`;
@@ -41,9 +48,10 @@ const Todo = mongoose.model("Todo", TodoSchema)
 
 module.exports = {
     createTodosDatabase,
-    getAllTodosDatabse,
-    completeTodosDatabse,
-    deleteTodosDatabse
+    getAllTodosDatabase,
+    completeTodosDatabase,
+    deleteTodosDatabase,
+    getCompletedTodosDatabase
 }
 
 exports.Todo = Todo
