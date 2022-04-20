@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { useNavigate } from "react-router-dom"
-import { BASE_API } from "../utils"
+import { createNewUser } from "../components/API"
 
 
 export default function RegisterPage() {
@@ -10,27 +10,16 @@ export default function RegisterPage() {
 
   const navigate = useNavigate()  
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault()
 
-    const payload = {username, password}
-    const url = `${BASE_API}/users/create`
-    
-    fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-    })
+    await createNewUser({username, password})
     .then(res => res.json())
     .then(data => {
       if (data.message) {
         setErrorText(data.message)
       } else {
-        const token = data.token
-        localStorage.setItem("todoList", token)
-        navigate("/login")
+        navigate("/")
       }
     })
 
