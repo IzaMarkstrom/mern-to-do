@@ -4,23 +4,33 @@ import RegisterPage from "./pages/RegisterPage"
 import LoginPage from "./pages/LoginPage"
 import HomePage from "./pages/HomePage";
 
-const UserContext = createContext()
+const Context = createContext()
 
 function App() {
   const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
   const [todos, setTodos] = useState([])
 
+  // useEffect(() => {
+  //   getUser()
+  //   getTodos()
+  // })
+
+  // const getUser = async () => {
+
+  // }
 
   return (
-    <div className="bodyContainer">
-    <Routes>
-      <Route path="/register" element={<RegisterPage/>} />
-      <Route path="/" element={<LoginPage/>} />
-      <Route path="/home" element={<HomePage/>} />
-    </Routes>
-    </div>
+    <Context.Provider value={{ username, setUsername, todos, setTodos}}>
+      <div className="bodyContainer">
+        <Routes>
+          <Route path="/register" element={<RegisterPage/>} />
+          <Route path="/" element={<LoginPage/>} />
+          <Route path="/home" element={<HomePage/>} />
+        </Routes>
+      </div>
+    </Context.Provider>
   );
 }
 
+export { Context }
 export default App;
