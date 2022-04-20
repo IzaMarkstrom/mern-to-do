@@ -20,8 +20,7 @@ const listAllTodos = async (req, res) => {
     // }
 
     const todoData = await getAllTodosDatabase()
-    // VARFÖR GENERERAR DEN TVÄRTOM????
-    // Fråga Zander
+
     if(todoData !== null){
         res.status(200).json({ todoData })
     } else {
