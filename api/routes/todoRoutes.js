@@ -7,6 +7,7 @@ const todos = require("../controllers/todos")
 
 router.get("/homepage", authUser, todos.listAllTodos);
 router.post("/homepage", authUser, todos.createTodos);
+router.get("/homepage/completedTodos", authUser, todos.listCompletedTodos);
 router.put("/:id", authUser, todos.completeTodos);
 router.delete("/:id", authUser, todos.deleteTodos);
 
