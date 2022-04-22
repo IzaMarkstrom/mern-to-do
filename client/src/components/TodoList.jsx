@@ -1,17 +1,23 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Context } from "../App"
 import { completeTodo, deleteTodo } from "./API"
 
 export default function TodoList() {
-    const { todos } = useContext(Context)
+    const { todos, setTodos } = useContext(Context)
+
+    useEffect( () => {
+         console.log(todos)
+      }, [todos])
 
     function setTime(createdAt){
-        return createdAt.substring(0, 16).replace("T", " kl ")
+        return createdAt.substring(0, 10).replace("T", " kl ")
     }
 
     const setCompleteTodo = async id => {
+        
         await completeTodo(id)
         .then(res => res.json())
+        .then(data => setTodos([...todos]))
     }
 
     const removeTodo = async id => {
