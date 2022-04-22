@@ -11,16 +11,17 @@ function App() {
   const [username, setUsername] = useState("")
   const [todos, setTodos] = useState(null)
 
-  useEffect(async () => {
+  useEffect(() => {
     getTodos()
     // getUser()
-  })
+  }, [])
 
   const getTodos = async () => {
     await getTodoList()
     .then(res => res.json())
     .then(data => setTodos(data.todoData))
     .catch(err => console.error(`Error: ${err}`))
+    
 }
 
 
@@ -33,7 +34,7 @@ function App() {
 
 
   return (
-    <Context.Provider value={{ username, setUsername, todos, setTodos}}>
+    <Context.Provider value={{ username, setUsername, todos, setTodos }}>
       <div className="">
         <Routes>
           <Route path="/register" element={<RegisterPage/>} />
