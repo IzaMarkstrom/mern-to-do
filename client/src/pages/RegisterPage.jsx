@@ -49,7 +49,7 @@ export default function RegisterPage() {
                 />
                 <input type="submit" value="Submit" className='loginBtn' />
             </form>
-          <p className="mt-2">Already a user? Click <a href="/login" className="loginLink">here</a> to login</p>
+          <p className="mt-2">Already a user? Click <a href="/" className="loginLink">here</a> to login</p>
       </div>
   </div>
   )
