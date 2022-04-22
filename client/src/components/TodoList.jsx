@@ -1,23 +1,19 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { Context } from "../App"
 import { completeTodo, deleteTodo } from "./API"
 
 export default function TodoList() {
-    const { todos, setTodos } = useContext(Context)
+    const { todos, setTodos, setReload } = useContext(Context)
 
-    useEffect( () => {
-         console.log(todos)
-      }, [todos])
 
     function setTime(createdAt){
         return createdAt.substring(0, 10).replace("T", " kl ")
     }
 
     const setCompleteTodo = async id => {
-        
         await completeTodo(id)
         .then(res => res.json())
-        .then(data => setTodos([...todos]))
+        .then(setReload(false))
     }
 
     const removeTodo = async id => {
@@ -27,7 +23,7 @@ export default function TodoList() {
 
   return (
     <>
-   {todos && todos.map(todo => (
+   {todos ? todos.map(todo => (
         <div className={"todo " + (todo.complete ? "is-complete" : "")}
         key={todo._id} onClick={() => setCompleteTodo(todo._id)}>
             <div className="checkbox"></div>
@@ -37,7 +33,7 @@ export default function TodoList() {
             <div className="delete-todo" onClick={() => removeTodo(todo._id)}>x</div>
             <div className="timestamp">{setTime(todo.createdAt)}</div>
         </div>
-    ))}
+    )) : "No todos"}
     </>
   )
 }
