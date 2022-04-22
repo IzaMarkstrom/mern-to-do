@@ -9,7 +9,6 @@ const generateToken = (user) => {
   });
 };
 
-
 const authUser = (req, _res, next) => {
   const authHeader = req.header("Authorization");
   if (authHeader) {
