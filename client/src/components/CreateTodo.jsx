@@ -10,10 +10,10 @@ export default function CreateTodo() {
 
         await createNewTodo(newTodo)
         .then(res => res.json())
-        .then(data => getTodoList())
+        .then(getTodoList())
 
         setPopupActive(false)
-        
+        setNewTodo("")
     }
 
   return (
