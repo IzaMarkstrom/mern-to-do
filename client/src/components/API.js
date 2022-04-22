@@ -47,5 +47,19 @@ async function createNewTodo(payload) {
     })
 }
 
+async function deleteTodo(todoId) {
+    return fetch(`${BASE_API}/todos/${todoId}`, { 
+        method: 'DELETE' 
+    })
+}
 
-export { createNewUser, loginUser, completeTodo, createNewTodo, getTodoList, getCompletedTodoList };
+
+export { 
+    createNewUser, 
+    loginUser, 
+    completeTodo, 
+    createNewTodo, 
+    getTodoList, 
+    getCompletedTodoList ,
+    deleteTodo
+};
