@@ -6,19 +6,6 @@ const { createTodosDatabase,
     Todo } = require("../models/TodoSchema")
 
 const listAllTodos = async (req, res) => {
-    const completedTodos = req.query.completedTodos
-
-    // if(completeTodos){
-    //     const todoData = await getCompletedTodosDatabase()
-    //     // VARFÖR GENERERAR DEN TVÄRTOM????
-    //     // Fråga Zander
-    //     if(todoData !== null){
-    //         res.status(200).json({ todoData })
-    //     } else {
-    //         res.status(404).json({ message: "No list found" })
-    //     }
-    // }
-
     const todoData = await getAllTodosDatabase()
 
     if(todoData !== null){
@@ -27,6 +14,16 @@ const listAllTodos = async (req, res) => {
         res.status(404).json({ message: "No list found" })
     }
     
+}
+
+const listCompletedTodos = async (req, res) => {
+    const todoData = await getCompletedTodosDatabase()
+
+    if(todoData !== null){
+        res.status(200).json({ todoData })
+    } else {
+        res.status(404).json({ message: "No list found" })
+    }
 }
 
 const createTodos = async (req, res) => {
@@ -50,4 +47,10 @@ const deleteTodos = async (req, res) => {
     res.status(200).json(result)
 }
 
-module.exports = { listAllTodos, createTodos, completeTodos, deleteTodos }
+module.exports = { 
+    listAllTodos, 
+    createTodos, 
+    completeTodos, 
+    deleteTodos, 
+    listCompletedTodos 
+}
