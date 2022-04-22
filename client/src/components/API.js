@@ -24,6 +24,14 @@ async function getTodoList() {
     })
 }
 
+async function getCompletedTodoList() {
+    return fetch(`${BASE_API}/todos/homepage/completedTodos`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify()
+    })
+}
+
 async function completeTodo(todoId) {
     return fetch(`${BASE_API}/todos/${todoId}`, {
         method: "PUT",
@@ -40,4 +48,4 @@ async function createNewTodo(payload) {
 }
 
 
-export { createNewUser, loginUser, completeTodo, createNewTodo, getTodoList };
+export { createNewUser, loginUser, completeTodo, createNewTodo, getTodoList, getCompletedTodoList };
