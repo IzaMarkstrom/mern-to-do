@@ -3,7 +3,7 @@ import { Context } from "../App"
 import { completeTodo, deleteTodo } from "./API"
 
 export default function TodoList() {
-    const { todos, setTodos, setReload } = useContext(Context)
+    const { todos, setReload } = useContext(Context)
 
 
     function setTime(createdAt){
@@ -29,7 +29,11 @@ export default function TodoList() {
             <div className="checkbox"></div>
     
             <div className="text">{todo.text}</div>
-    
+
+            {todo.tagList ? todo.tagList.map((tag, index) => (
+                <div className="todoTags" key={index}>{tag}</div>
+            )) : ""}
+
             <div className="delete-todo" onClick={() => removeTodo(todo._id)}>x</div>
             <div className="timestamp">{setTime(todo.createdAt)}</div>
         </div>
