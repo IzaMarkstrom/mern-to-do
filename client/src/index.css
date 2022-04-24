@@ -43,6 +43,16 @@ h3 {
   color: var(--primary);
 }
 
+.titleTasks {
+  display: inline-block;
+}
+
+.titleTags {
+  position: absolute;
+  margin-left: 48%;
+  display: inline-block;
+}
+
 .todo {
   position: relative;
   background-color: var(--dark-alt);
@@ -270,7 +280,7 @@ h3 {
 }
 
 .todoTags {
-  display: inline-flex;
+  display: flex;
   position: relative;
   top: 29px;
   right: 170px;
@@ -307,4 +317,35 @@ h3 {
   background: linear-gradient(-30deg, var(--light-alt), var(--primary));
   padding: 2px 8px;
   margin-bottom: 10px;
+}
+
+.tagsBox {
+  background-color: white;
+  position: absolute;
+  right: 5%;
+  width: 200px;
+  padding: 10px 20px 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 5px 8px 12px grey;
+}
+
+.tagsInBox {
+  display: inline-flex;
+  cursor: pointer;
+  top: 29px;
+  right: 170px;
+  background-color: var(--light-alt);
+  box-shadow: 2px 2px 5px var(--dark);
+  padding: .1em .25em;
+  border-radius: 20px;
+  margin-right: 5px;
+}
+
+.todosByTags {
+  position: absolute;
+  background-color: white;
+  z-index: 1000;
+  border-radius: 10px;
+  padding: 10px;
 }
