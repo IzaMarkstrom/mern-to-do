@@ -30,7 +30,8 @@ export default function HomePage() {
     <div>
       <Logout/>
       <h1>Hello ${} Iza</h1>
-      <h3>Your tasks</h3>
+      <h3 className='titleTasks'>Your tasks</h3>
+      <h3 className='titleTags'>All tags</h3>
       <TagsBox/>
       <div className="todos">
         <GetAllTodos/>
