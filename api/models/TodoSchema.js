@@ -32,6 +32,12 @@ const getCompletedTodosDatabase = async () => {
     return listTodos ? listTodos : null
 }
 
+const getTodosByTagDatabase = async (tag) => {
+    const listTodos = await Todo.find({tagList: tag})
+    .sort({ createdAt: -1 })
+    return listTodos ? listTodos : null
+}
+
 const completeTodosDatabase = async (todoId) => {
     const todo = await Todo.findOne({_id: todoId})
 
@@ -59,7 +65,8 @@ module.exports = {
     getTodosDatabase,
     completeTodosDatabase,
     deleteTodosDatabase,
-    getCompletedTodosDatabase
+    getCompletedTodosDatabase,
+    getTodosByTagDatabase
 }
 
 exports.Todo = Todo
