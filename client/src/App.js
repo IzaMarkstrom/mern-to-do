@@ -9,11 +9,12 @@ const Context = createContext()
 function App() {
   const [username, setUsername] = useState("")
   const [todos, setTodos] = useState(null)
+  const [tags, setTags] = useState([])
   const [reload, setReload] = useState(false)
 
 
   return (
-    <Context.Provider value={{ username, setUsername, todos, setTodos, reload, setReload }}>
+    <Context.Provider value={{ username, setUsername, todos, setTodos, reload, setReload, tags, setTags }}>
       <div className="">
         <Routes>
           <Route path="/register" element={<RegisterPage/>} />
