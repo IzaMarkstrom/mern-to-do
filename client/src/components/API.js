@@ -27,6 +27,17 @@ async function getTagList() {
     })
 }
 
+async function getTodosByTagList(tag) {
+    const token = localStorage.getItem("todoList")
+
+    return fetch(`${BASE_API}/todos/homepage/tag/${tag}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json", 
+                    "Authorization": `Bearer ${token}` },
+        body: JSON.stringify()
+    })
+}
+
 async function getTodoList() {
     const token = localStorage.getItem("todoList")
 
@@ -96,6 +107,7 @@ export {
     getTagList,
     getTodoList, 
     getNotDoneTodoList,
-    getCompletedTodoList ,
-    deleteTodo
+    getCompletedTodoList,
+    deleteTodo,
+    getTodosByTagList
 };
