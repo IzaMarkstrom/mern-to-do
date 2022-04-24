@@ -3,8 +3,7 @@ const { createTodosDatabase,
     getTodosDatabase,
     completeTodosDatabase, 
     deleteTodosDatabase,
-    getCompletedTodosDatabase, 
-    Todo } = require("../models/TodoSchema")
+    getCompletedTodosDatabase } = require("../models/TodoSchema")
 
 const listAllTodos = async (req, res) => {
     const todoData = await getAllTodosDatabase()
