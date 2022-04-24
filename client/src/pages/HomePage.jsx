@@ -7,6 +7,7 @@ import Logout from '../components/Logout'
 import TodoList from '../components/TodoList'
 import { Context } from '../App'
 import { getTodoList } from '../components/API'
+import TagsBox from '../components/TagsBox'
 
 
 export default function HomePage() {
@@ -30,6 +31,7 @@ export default function HomePage() {
       <Logout/>
       <h1>Hello ${} Iza</h1>
       <h3>Your tasks</h3>
+      <TagsBox/>
       <div className="todos">
         <GetAllTodos/>
         <GetTodos/>
