@@ -27,6 +27,17 @@ async function getTodoList() {
     })
 }
 
+async function getNotDoneTodoList() {
+    const token = localStorage.getItem("todoList")
+
+    return fetch(`${BASE_API}/todos/homepage/notDone`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json", 
+                    "Authorization": `Bearer ${token}` },
+        body: JSON.stringify()
+    })
+}
+
 async function getCompletedTodoList() {
     const token = localStorage.getItem("todoList")
 
@@ -55,7 +66,7 @@ async function createNewTodo(payload) {
         method: "POST",
         headers: { "Content-Type": "application/json", 
         "Authorization": `Bearer ${token}` },
-        body: JSON.stringify({text: payload})
+        body: JSON.stringify(payload)
     })
 }
 
@@ -72,6 +83,7 @@ export {
     completeTodo, 
     createNewTodo, 
     getTodoList, 
+    getNotDoneTodoList,
     getCompletedTodoList ,
     deleteTodo
 };
