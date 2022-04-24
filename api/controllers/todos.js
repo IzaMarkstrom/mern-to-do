@@ -1,5 +1,6 @@
 const { createTodosDatabase, 
     getAllTodosDatabase, 
+    getTodosDatabase,
     completeTodosDatabase, 
     deleteTodosDatabase,
     getCompletedTodosDatabase, 
@@ -7,13 +8,22 @@ const { createTodosDatabase,
 
 const listAllTodos = async (req, res) => {
     const todoData = await getAllTodosDatabase()
-
     if(todoData !== null){
         res.status(200).json({ todoData })
     } else {
         res.status(404).json({ message: "No list found" })
     }
     
+}
+
+const listNotDoneTodos = async (req, res) => {
+    const todoData = await getTodosDatabase()
+
+    if(todoData !== null){
+        res.status(200).json({ todoData })
+    } else {
+        res.status(404).json({ message: "No list found" })
+    }
 }
 
 const listCompletedTodos = async (req, res) => {
@@ -27,8 +37,8 @@ const listCompletedTodos = async (req, res) => {
 }
 
 const createTodos = async (req, res) => {
-    const todoData = req.body.text
-
+    const todoData = req.body
+    console.log(todoData)
     const todo = await createTodosDatabase(todoData)
     res.status(200).json({ todo })
 }
@@ -49,6 +59,7 @@ const deleteTodos = async (req, res) => {
 
 module.exports = { 
     listAllTodos, 
+    listNotDoneTodos,
     createTodos, 
     completeTodos, 
     deleteTodos, 

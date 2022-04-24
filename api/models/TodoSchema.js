@@ -3,18 +3,25 @@ const Schema = mongoose.Schema
 
 const TodoSchema = new Schema({
     text: {type: String, required: true},
+    tagList: [{ type: String }],
     complete: {type: Boolean, default: false},
 },  { timestamps: true })
 
 
 const createTodosDatabase = async (todoData) => {
-    const todo = new Todo({text: todoData})
+    const todo = new Todo({text: todoData.newTodo, tagList: todoData.tags})
     await todo.save()
     return todo
 }
 
 const getAllTodosDatabase = async () => {
     const listTodos = await Todo.find()
+    .sort({ createdAt: -1 })
+    return listTodos ? listTodos : null
+}
+
+const getTodosDatabase = async () => {
+    const listTodos = await Todo.find({complete: false})
     .sort({ createdAt: -1 })
     return listTodos ? listTodos : null
 }
@@ -49,6 +56,7 @@ const Todo = mongoose.model("Todo", TodoSchema)
 module.exports = {
     createTodosDatabase,
     getAllTodosDatabase,
+    getTodosDatabase,
     completeTodosDatabase,
     deleteTodosDatabase,
     getCompletedTodosDatabase
