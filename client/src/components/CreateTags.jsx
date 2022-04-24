@@ -16,7 +16,7 @@ export default function CreateTags() {
     }
 
     function removeTag(index){
-        setTags(tags.filter((el, i) => i !== index))
+        setTags(tags.filter((_el, i) => i !== index))
     }
 
   return (
