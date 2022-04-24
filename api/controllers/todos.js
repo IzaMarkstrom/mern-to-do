@@ -3,7 +3,8 @@ const { createTodosDatabase,
     getTodosDatabase,
     completeTodosDatabase, 
     deleteTodosDatabase,
-    getCompletedTodosDatabase } = require("../models/TodoSchema")
+    getCompletedTodosDatabase,
+    getTodosByTagDatabase } = require("../models/TodoSchema")
 
 const listAllTodos = async (req, res) => {
     const todoData = await getAllTodosDatabase()
@@ -27,6 +28,17 @@ const listNotDoneTodos = async (req, res) => {
 
 const listCompletedTodos = async (req, res) => {
     const todoData = await getCompletedTodosDatabase()
+
+    if(todoData !== null){
+        res.status(200).json({ todoData })
+    } else {
+        res.status(404).json({ message: "No list found" })
+    }
+}
+
+const listTodosByTag = async (req, res) => {
+    const tag = req.params.tag
+    const todoData = await getTodosByTagDatabase(tag)
 
     if(todoData !== null){
         res.status(200).json({ todoData })
@@ -62,5 +74,6 @@ module.exports = {
     createTodos, 
     completeTodos, 
     deleteTodos, 
-    listCompletedTodos 
+    listCompletedTodos,
+    listTodosByTag
 }
