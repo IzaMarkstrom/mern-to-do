@@ -16,6 +16,17 @@ async function loginUser(payload) {
     })
 }
 
+async function getTagList() {
+    const token = localStorage.getItem("todoList")
+
+    return fetch(`${BASE_API}/tags`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json", 
+                    "Authorization": `Bearer ${token}` },
+        body: JSON.stringify()
+    })
+}
+
 async function getTodoList() {
     const token = localStorage.getItem("todoList")
 
@@ -82,6 +93,7 @@ export {
     loginUser, 
     completeTodo, 
     createNewTodo, 
+    getTagList,
     getTodoList, 
     getNotDoneTodoList,
     getCompletedTodoList ,
