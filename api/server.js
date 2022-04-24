@@ -1,7 +1,5 @@
 const express = require("express");
 const mongoose = require("./database");
-const jwt = require("jsonwebtoken");
-const { User } = require("./models/UserSchema");
 const cors = require("cors");
 require("dotenv").config();
 
@@ -15,9 +13,11 @@ app.use(cors())
 // Api routes
 const userRoutes = require("./routes/userRoutes")
 const todoRoutes = require("./routes/todoRoutes")
+const tagRoutes = require("./routes/tagRoutes")
 
 app.use("/api/users", userRoutes)
 app.use("/api/todos", todoRoutes)
+app.use("/api/tags", tagRoutes)
 
 
 app.listen(PORT, () => {
