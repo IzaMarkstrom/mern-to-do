@@ -12,11 +12,12 @@ const createUser = async (req, res) => {
     
     if(userExists){
         res.status(403).json({ message: "Username already exists" })
+    } else {
+        const user = new User ({username, password})
+        await user.save()
+        res.json(username)
     }
 
-    const user = new User ({username, password})
-    await user.save()
-    res.json(username)
 }
 
 const loginUser = async (req, res) => {
@@ -39,4 +40,14 @@ const loginUser = async (req, res) => {
     }
 }
 
-module.exports = { createUser, loginUser }
+const getUser = async (req, res) => {
+    const user = req.user
+
+    try {
+        res.status(200).json(user)
+    } catch (error) {
+        res.status(403).json({ error  })
+    }    
+}
+
+module.exports = { createUser, loginUser, getUser }
