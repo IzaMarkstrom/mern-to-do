@@ -16,6 +16,17 @@ async function loginUser(payload) {
     })
 }
 
+async function getUserInfo() {
+    const token = localStorage.getItem("todoList")
+    
+    return fetch(`${BASE_API}/users//getUser`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json", 
+        "Authorization": `Bearer ${token}` },
+        body: JSON.stringify()
+    })
+}
+
 async function getTagList() {
     const token = localStorage.getItem("todoList")
 
@@ -109,5 +120,6 @@ export {
     getNotDoneTodoList,
     getCompletedTodoList,
     deleteTodo,
-    getTodosByTagList
+    getTodosByTagList,
+    getUserInfo
 };
