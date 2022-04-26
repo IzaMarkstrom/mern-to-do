@@ -56,16 +56,23 @@ const createTodos = async (req, res) => {
 
 const completeTodos = async (req, res) => {
     const todoId = req.params.id
-    const todo = await completeTodosDatabase(todoId)
 
-    res.status(200).json({ todo })
+    try {
+        const todo = await completeTodosDatabase(todoId)
+        res.status(200).json({ todo })
+    } catch (error) {
+        res.status(404).json({ message: "No todo found", error })
+    }
+    
+
+    
 }
 
 const deleteTodos = async (req, res) => {
     const todoId = req.params.id
-    const result = await deleteTodosDatabase(todoId)
+    await deleteTodosDatabase(todoId)
 
-    res.status(200).json(result)
+    res.status(200).json({message: "Todo deleted"})
 }
 
 module.exports = { 
