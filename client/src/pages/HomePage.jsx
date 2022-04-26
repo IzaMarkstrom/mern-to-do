@@ -8,6 +8,7 @@ import TodoList from '../components/TodoList'
 import { Context } from '../App'
 import { getTodoList } from '../components/API'
 import TagsBox from '../components/TagsBox'
+import GetUser from '../components/GetUser'
 
 
 export default function HomePage() {
@@ -15,7 +16,6 @@ export default function HomePage() {
 
   useEffect(() => {
     getTodos()
-    // getUser()
   }, [reload])
 
   const getTodos = async () => {
@@ -24,13 +24,14 @@ export default function HomePage() {
     .then(data => setTodos(data.todoData))
     .then(setReload(true))
     .catch(err => console.error(`Error: ${err}`))
-    
 }
+
+
   return (
     <div>
       <Logout/>
-      <h1>Hello ${} Iza</h1>
-      <h3 className='titleTasks'>Your tasks</h3>
+      <GetUser/>
+      <h3 className='titleTasks'>These are your tasks</h3>
       <h3 className='titleTags'>All tags</h3>
       <TagsBox/>
       <div className="todos">
